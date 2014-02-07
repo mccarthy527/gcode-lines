@@ -1,15 +1,15 @@
 {
   "name": "gcode-lines",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "turns gcode states into line segments",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "interpret-gcode": "^0.0.1"
   },
   "devDependencies": {
+      "interpret-gcode": "0.0.1",
       "tape": "~2.4.2"
   },
   "scripts": {
