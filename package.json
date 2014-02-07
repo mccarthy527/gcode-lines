@@ -1,0 +1,34 @@
+{
+  "name": "gcode-lines",
+  "version": "0.0.0",
+  "description": "turns gcode states into line segments",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "interpret-gcode": "^0.0.1"
+  },
+  "devDependencies": {
+      "tape": "~2.4.2"
+  },
+  "scripts": {
+    "test": "tape test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mccarthy527/gcode-lines.git"
+  },
+  "keywords": [
+    "gcode",
+    "line",
+    "segment",
+    "FDM",
+    "reprap"
+  ],
+  "author": "Brian McCarthy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mccarthy527/gcode-lines/issues"
+  }
+}
