@@ -1,25 +1,19 @@
 var sl = require('../index.js')
 var gc = require('interpret-gcode')
 var fs = require("fs")
-var test = require('tape')
-var path = require('path')
 
+var data = fs.readFileSync("testbox.gcode")
+console.log('Current directory: ' + process.cwd());
+var fileContent = data.toString()
+var states = gc(fileContent)
+var roads = sl(states)
 
-function runTest(t, fileName) {
-	var data = fs.readFileSync(path.join(__dirname, fileName))
-	var fileContent = data.toString()
-	var history = gc(fileContent)
-	//console.log(history)
-	var roads = sl(history)
-	console.log(roads.lines)
-	return roads
+for (i=0; i<roads.extruded.length; i++)
+{
+	console.log(roads.lines[i])
+	console.log('extruded '+ roads.extruded[i])
+	console.log('length: '+ roads.lngth[i])
+	console.log('ratio: ' + roads.extruded[i]/roads.lngth[i])
+	console.log('time: ' + roads.time[i])
+	console.log('\n')
 }
-
-function testCase(t) {
-	//var roads = runTest(t, "../../gcode-parser/test/simpletest2.gcode")
-	//var roads = runTest(t, "../test/testbox.gcode")
-	var  roads = runTest(t, "../../gcode-parser/test/simpletest1.gcode")
-	t.end()
-}
-
-test('gcode-to-lines', testCase)

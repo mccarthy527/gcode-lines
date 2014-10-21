@@ -11,6 +11,8 @@ function states2lines(states)
 	result.extruded = []
 	result.feedrate = []
 	result.feedRate = []
+	result.lngth = []
+	result.time = [] 		//time since the very first gcode command in the file
 	for(var i=1;i<states.length;i++)
 	{
 		result.lines[i] = [states[i-1].x, states[i].x]
@@ -20,6 +22,34 @@ function states2lines(states)
 			result.extruded[i] = 0
 		}
 		result.feedRate[i] = [states[i-1].f, states[i].f]
+		result.lngth[i] = distance(states[i-1].x, states[i].x)
+		
+		result.time[i] = result.time[i-1] + calcTime(result.lngth[i], states[i-1].f, states[i].f, false)
 	}
 	return result
+}
+//lnght - length of the extrusion 						[mm]
+//prevfeedrate - feedrate at the start of the move		[mm/min]
+//currfeedrate - feedrate at the end of the move		[mm/min]
+//interpfeedrate - should feedrate be interpolated?		boolean
+function calcTime(lngth, prevfeedrate, currfeedrate, interpfeedrate)
+{
+	var time = 0
+	if(interpfeedrate) 	//feedrate is linearly interpolated
+	{
+		console.error('interpolation of feedrates is not implemented yet!')
+	}
+	else 				//use feedrate from the current state
+	{
+		time =  lngth/currfeedrate*60 	//time for this move is in seconds.
+	}
+	return time
+}
+
+function distance(A,B)
+{
+	var dx = A[0]-B[0] 
+	var dy = A[1]-B[1] 
+	var dz = A[2]-B[2] 
+	return Math.sqrt(dx*dx + dy*dy + dz*dz)
 }
