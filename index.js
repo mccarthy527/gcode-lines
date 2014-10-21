@@ -13,6 +13,7 @@ function states2lines(states)
 	result.feedRate = []
 	result.lngth = []
 	result.time = [] 		//time since the very first gcode command in the file
+	result.time[0] = 0
 	for(var i=1;i<states.length;i++)
 	{
 		result.lines[i] = [states[i-1].x, states[i].x]
