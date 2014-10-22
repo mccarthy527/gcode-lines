@@ -12,8 +12,12 @@ function states2lines(states)
 	result.feedrate = []
 	result.feedRate = []
 	result.lngth = []
-	result.time = [] 		//time since the very first gcode command in the file
-	result.time[0] = 0
+	result.clock = [] 		//time from the very first gcode command in the file until this particular line is completed
+	result.clock[0] = 0
+	result.time = []		//time to move from the previous to the current state
+	result.linenum = []
+
+
 	for(var i=1;i<states.length;i++)
 	{
 		result.lines[i] = [states[i-1].x, states[i].x]
@@ -25,7 +29,12 @@ function states2lines(states)
 		result.feedRate[i] = [states[i-1].f, states[i].f]
 		result.lngth[i] = distance(states[i-1].x, states[i].x)
 		
-		result.time[i] = result.time[i-1] + calcTime(result.lngth[i], states[i-1].f, states[i].f, false)
+		//compute time
+		result.time[i] = calcTime(result.lngth[i], states[i-1].f, states[i].f, false)
+		result.clock[i] = result.clock[i-1] + result.time[i]
+		
+		//set layer and line number
+		result.linenum[i] = [states[i-1].linenum, states[i].linenum]
 	}
 	return result
 }
@@ -39,6 +48,10 @@ function calcTime(lngth, prevfeedrate, currfeedrate, interpfeedrate)
 	if(interpfeedrate) 	//feedrate is linearly interpolated
 	{
 		console.error('interpolation of feedrates is not implemented yet!')
+	}
+	else if(currfeedrate == 0)
+	{
+		console.log('zero feedrate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 	}
 	else 				//use feedrate from the current state
 	{

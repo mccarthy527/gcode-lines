@@ -7,10 +7,12 @@
     "test": "test"
   },
   "dependencies": {
+	
   },
   "devDependencies": {
       "interpret-gcode": "0.0.1",
-      "tape": "~2.4.2"
+      "tape": "~2.4.2",
+	  "brfs": "0.0.9"
   },
   "scripts": {
     "test": "tape test/test.js"
