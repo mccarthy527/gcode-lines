@@ -2,7 +2,8 @@ var sl = require('../index.js')
 var gc = require('interpret-gcode')
 var fs = require("fs")
 
-var data = fs.readFileSync("testbox.gcode") //brfs module?
+var data = fs.readFileSync("C:/Users/Brian/Documents/GitHub/gcode-lines/test/testbox.gcode")
+
 console.log('Current directory: ' + process.cwd());
 var fileContent = data.toString()
 var states = gc(fileContent)

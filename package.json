@@ -17,6 +17,9 @@
   "scripts": {
     "test": "tape test/test.js"
   },
+  "browserify": {
+	"transform": "brfs"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mccarthy527/gcode-lines.git"
