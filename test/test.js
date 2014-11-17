@@ -1,5 +1,5 @@
 var sl = require('../index.js')
-var gc = require('interpret-gcode')
+var gc = require('gcode-parser')
 var fs = require("fs")
 
 var data = fs.readFileSync("C:/Users/Brian/Documents/GitHub/gcode-lines/test/testbox.gcode")
