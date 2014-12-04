@@ -9,7 +9,6 @@ function states2lines(states)
 	var result = []
 	result.lines = []
 	result.extruded = []
-	result.feedrate = []
 	result.feedRate = []
 	result.lngth = []
 	result.clock = [] 		//time from the very first gcode command in the file until this particular line is completed
